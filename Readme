@@ -1,0 +1,65 @@
+# Genetic Algorithm for Race Simulation
+
+This project implements a genetic algorithm to simulate a car race on a track. The goal is for the cars to learn to navigate the track and reach the finish line using a set of genes that represent their movement directions.
+
+## How It Works
+
+1. **Track Configuration**: The track is represented by a matrix where `1` represents a wall and `0` represents a free path.
+2. **Cars**: Each car has an initial position, a set of genes (movement directions), and a method to calculate its fitness (how close it is to the finish line).
+3. **Movement**: Cars move along the track according to their genes. If a car collides with a wall or reaches the step limit, it is marked as burned.
+4. **Fitness**: A car's fitness is calculated based on the distance to the finish line and the number of steps taken.
+5. **Genetic Algorithm**: In each generation, the cars with the best fitness are selected for reproduction. Their genes are combined and mutated to create a new generation of cars.
+
+## How to Run
+
+1. **Create and Activate the Virtual Environment**:
+    ```sh
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+
+2. **Install Dependencies**:
+    ```sh
+    pip install numpy
+    ```
+
+3. **Run the Script**:
+    ```sh
+    python algoritmo-genetico.py
+    ```
+
+4. **Follow the Simulation**: The progress of the simulation will be displayed in the terminal.
+
+## Example Output
+
+```sh
+Generation: 1
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜🟩🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩🟩🟩🟩🟩🟩🟩⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜🟩⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+```
+
+## Contribution
+
+Feel free to contribute with improvements to this project. Open an issue or submit a pull request in the repository.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
