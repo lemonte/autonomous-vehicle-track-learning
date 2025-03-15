@@ -141,7 +141,8 @@ class Carro:
 
     def fitness(self):
         dist = np.linalg.norm(np.array(self.posicao) - np.array(final_pos))
-        return 1 / (dist + 1 + (self.passo * 0.2)) +initial_pos[0] - self.posicao[0]
+        bonus = 1000 if self.posicao == list(final_pos) else 0
+        return 1 / (dist + 1 + (self.passo * 0.2)) + initial_pos[0] - self.posicao[0] + bonus
 
     def decidir_movimento(self):
         situacao = self.sensores()
@@ -151,17 +152,85 @@ class Carro:
 
     def sensores(self):
         x, y = self.posicao
-        arredores = [
-            self.pista[x-1, y-1],  # esquina superior esquerda
-            self.pista[x-1, y],    # cima
-            self.pista[x-1, y+1],  # esquina superior direita
-            self.pista[x, y-1],    # esquerda
-            self.pista[x, y+1],    # direita
-            self.pista[x+1, y-1],  # esquina inferior esquerda
-            self.pista[x+1, y],    # baixo
-            self.pista[x+1, y+1]  # esquina inferior direita
-        ]
-        return tuple(arredores)
+        distancias = []
+
+        # Esquina superior esquerda
+        dist_sup_esq = 0
+        i, j = x-1, y-1
+        while i >= 0 and j >= 0:
+            if self.pista[i, j] == 1:
+                break
+            dist_sup_esq += 1
+            i -= 1
+            j -= 1
+        distancias.append(dist_sup_esq)
+
+        # Cima
+        dist_cima = 0
+        for i in range(x-1, -1, -1):
+            if self.pista[i, y] == 1:
+                break
+            dist_cima += 1
+        distancias.append(dist_cima)
+
+        # Esquina superior direita
+        dist_sup_dir = 0
+        i, j = x-1, y+1
+        while i >= 0 and j < self.pista.shape[1]:
+            if self.pista[i, j] == 1:
+                break
+            dist_sup_dir += 1
+            i -= 1
+            j += 1
+        distancias.append(dist_sup_dir)
+
+        # Esquerda
+        dist_esquerda = 0
+        for j in range(y-1, -1, -1):
+            if self.pista[x, j] == 1:
+                break
+            dist_esquerda += 1
+        distancias.append(dist_esquerda)
+
+        # Direita
+        dist_direita = 0
+        for j in range(y+1, self.pista.shape[1]):
+            if self.pista[x, j] == 1:
+                break
+            dist_direita += 1
+        distancias.append(dist_direita)
+
+        # Esquina inferior esquerda
+        dist_inf_esq = 0
+        i, j = x+1, y-1
+        while i < self.pista.shape[0] and j >= 0:
+            if self.pista[i, j] == 1:
+                break
+            dist_inf_esq += 1
+            i += 1
+            j -= 1
+        distancias.append(dist_inf_esq)
+
+        # Baixo
+        dist_baixo = 0
+        for i in range(x+1, self.pista.shape[0]):
+            if self.pista[i, y] == 1:
+                break
+            dist_baixo += 1
+        distancias.append(dist_baixo)
+
+        # Esquina inferior direita
+        dist_inf_dir = 0
+        i, j = x+1, y+1
+        while i < self.pista.shape[0] and j < self.pista.shape[1]:
+            if self.pista[i, j] == 1:
+                break
+            dist_inf_dir += 1
+            i += 1
+            j += 1
+        distancias.append(dist_inf_dir)
+
+        return tuple(distancias)
 
 def torneio(carros, tamanho_torneio=3):
     competidores = [choice(carros) for _ in range(tamanho_torneio)]
